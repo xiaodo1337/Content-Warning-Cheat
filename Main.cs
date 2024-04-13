@@ -539,7 +539,7 @@ namespace TestUnityPlugin
                     Items.DumpItemsToConsole();
 
                 if (GUILayout.Button("打开github项目链接"))
-                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder(""), new StringBuilder(), new StringBuilder(), 0)
+                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder(@"https://github.com/xiaodo1337/Content-Warning-Cheat"), new StringBuilder(), new StringBuilder(), 0)
                 CenterLabel("严厉谴责国内某个拿github开源代码圈钱的傻狗");
                 GUILayout.EndArea();
             }
