@@ -43,18 +43,6 @@ namespace TestUnityPlugin
             "Toolkit_Wisk",
             "Weeping"
         };
-        public static bool AutoRemoveLocalMonsters = false;
-        public static void Run()
-        {
-            if(AutoRemoveLocalMonsters) RemoveMonsters();
-        }
-        public static void RemoveMonsters()
-        {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
-            {
-                GameObject.Destroy(monster.transform.parent);
-            }
-        }
         public static void SpawnMonster(string monster)
         {
             PhotonNetwork.Instantiate(monster, UsefulFuncs.GetCrosshairPosition(true), UnityEngine.Quaternion.identity, 0, null);
@@ -72,14 +60,14 @@ namespace TestUnityPlugin
         {
             Monster.KillAll();
         }
-        public static void KillAll()
+        public static void ReviveAll()
         {
             foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
             {
                 monster.transform.parent.GetComponent<Player>().refs.view.RPC("RPCA_PlayerRevive", RpcTarget.All, new object[] { });
             }
         }
-        public static void Die()
+        public static void KillAll()
         {
             foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
             {

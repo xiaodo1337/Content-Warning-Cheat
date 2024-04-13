@@ -280,20 +280,9 @@ namespace TestUnityPlugin
     {
         public static List<string> Name = new List<string>
         {
-            "注意看！",
-            "Mamba Back！",
-            "是的孩子们，我回来了！",
-            "还有，那件事情我们是自愿的。",
-            "我嘞个骚杠",
-            "我想陆管了",
-            "我嘞个豆",
-            "兄弟你好香",
-            "麻麻生的",
-            "哈吉米哈吉米哈吉米莫那没卤多",
-            "你有非常好高速运转的机器进入中国",
-            "阿米挪思",
-            "闭嘴！我的爸爸在为 米哈游 工作！所以他可以在你的电恼上安装原神！",
-
+            //在这里自定义你的滚动昵称
+            "Powered By xiaodo1337.",
+            "此作弊为免费作弊，如果你是购买获得，恭喜你被圈钱了！"
         };
         public static int CurrentNamePos = 0;
         public static float ColorHUE = 0.005f;

@@ -45,30 +45,8 @@ namespace TestUnityPlugin
             if (Input.GetKeyDown(KeyCode.Insert))
                 DisplayingWindow = !DisplayingWindow;
 
-            if (Input.GetKeyDown(KeyCode.F1) && PhotonNetwork.CurrentRoom != null)
-            {
-                PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-                foreach (Player player in GameObject.FindObjectsOfType<Player>())
-                {
-                    if (player.IsLocal && !player.ai)
-                    {
-                        //PhotonNetwork.NetworkingClient.ChangeLocalID(PhotonNetwork.MasterClient.ActorNumber);
-                        /*
-                        byte id = 43;
-                        player.refs.view.RPC("RPC_PlayEmote", RpcTarget.All, new object[] { id });
-                        Traverse.Create(GameObject.FindObjectOfType<PlayerCustomizer>()).Field("view_g").GetValue<PhotonView>().RPC("RPCM_RequestEnterTerminal", RpcTarget.MasterClient, new object[]
-                        {
-                            player.refs.view.ViewID
-                        });
-                        ShadowRealmHandler.instance.TeleportPlayerToRandomRealm(player);
-                        */
-                    }
-                }
-            }
-
             Players.Run();
             Items.Run();
-            Monsters.Run();
             Misc.Run();
         }
         public bool DisplayingWindow = false;
@@ -454,10 +432,10 @@ namespace TestUnityPlugin
                 {
                     CenterLabel("功能");
                     GUILayout.BeginHorizontal();
-                    if (GUILayout.Button("移除"))
+                    if (GUILayout.Button("苏醒"))
+                        Monsters.ReviveAll();
+                    if (GUILayout.Button("杀死"))
                         Monsters.KillAll();
-                    if (GUILayout.Button("杀死AI"))
-                        Monsters.Die();
                     if (GUILayout.Button("生成炸弹"))
                         Monsters.Explode();
                     if (GUILayout.Button("摔倒"))
@@ -467,15 +445,10 @@ namespace TestUnityPlugin
                     if (GUILayout.Button("拖拽到身边"))
                         Monsters.DragToLocal();
                     GUILayout.EndHorizontal();
-                    Monsters.AutoRemoveLocalMonsters = GUILayout.Toggle(Monsters.AutoRemoveLocalMonsters, "自动移除本地怪物");
                     if (GUILayout.Button("让狗叫怪狗叫"))
-                    {
                         Monsters.MakeMouthesScream();
-                    }
                     if (GUILayout.Button("清除所有怪物"))
-                    {
                         Monsters.ClearAllMonsters();
-                    }
 
                     CenterLabel("生成");
                     int count = 0;
@@ -511,6 +484,7 @@ namespace TestUnityPlugin
                 ESP.EnablePlayerESP = GUILayout.Toggle(ESP.EnablePlayerESP, "玩家");
                 ESP.EnableMonsterESP = GUILayout.Toggle(ESP.EnableMonsterESP, "怪物");
                 ESP.EnableItemESP = GUILayout.Toggle(ESP.EnableItemESP, "物品");
+                ESP.EnableDivingBellESP = GUILayout.Toggle(ESP.EnableDivingBellESP, "潜艇");
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 ESP.EnableDrawLine = GUILayout.Toggle(ESP.EnableDrawLine, "射线");
@@ -539,7 +513,7 @@ namespace TestUnityPlugin
                     Items.DumpItemsToConsole();
 
                 if (GUILayout.Button("打开github项目链接"))
-                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder(@"https://github.com/xiaodo1337/Content-Warning-Cheat"), new StringBuilder(), new StringBuilder(), 0)
+                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder(@"https://github.com/xiaodo1337/Content-Warning-Cheat"), new StringBuilder(), new StringBuilder(), 0);
                 CenterLabel("严厉谴责国内某个拿github开源代码圈钱的傻狗");
                 GUILayout.EndArea();
             }
