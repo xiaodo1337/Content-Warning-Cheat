@@ -282,7 +282,7 @@ namespace TestUnityPlugin
         {
             //在这里自定义你的滚动昵称
             "Powered By xiaodo1337.",
-            "此作弊为免费作弊，如果你是购买获得，恭喜你被圈钱了！"
+            "此作弊模组免费开源，如果你是购买获得，恭喜你被圈钱了！"
         };
         public static int CurrentNamePos = 0;
         public static float ColorHUE = 0.005f;
