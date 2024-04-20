@@ -180,7 +180,7 @@ namespace ContentWarningCheat
                         if (!ItemDatabase.TryGetItemFromID(popper_id, out Item item))
                             return;
 
-                        PlayerItems playerItems = Player.localPlayer.GetComponent<PlayerItems>();
+                        //PlayerItems playerItems = Player.localPlayer.GetComponent<PlayerItems>();
                         var temp = Player.localPlayer.data.selectedItemSlot;
                         if (temp != -1 && inventory.slots[temp].ItemInSlot.item.name == item.name)
                         {

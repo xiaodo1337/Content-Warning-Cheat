@@ -24,7 +24,7 @@ namespace ContentWarningCheat
         [DllImport("Shell32.dll")]
         public static extern int ShellExecuteA(IntPtr hwnd, StringBuilder lpszOp, StringBuilder lpszFile, StringBuilder lpszParams, StringBuilder lpszDir, int FsShowCmd);
     }
-    [BepInPlugin("xiaodo.plugin.ContentWarningCheat", "Cheating!", CheckUpdate.Version)]
+    [BepInPlugin("xiaodo.plugin.ContentWarningCheat", "Cheating!", "1.0")]
     public class HelloWorld : BaseUnityPlugin
     {
         void Start()
@@ -535,7 +535,7 @@ namespace ContentWarningCheat
     internal class Hack
     {
         private static float NextUpdate = 0f;
-        private static float UpdateInterval = 1.0f;
+        private static readonly float UpdateInterval = 1.0f;
         public static Label GUILabel = Label.Misc;
         public enum Label
         {
@@ -552,6 +552,7 @@ namespace ContentWarningCheat
                 NextUpdate = Time.time + UpdateInterval;
                 if (Player.localPlayer == null)
                     return;
+
                 if(ESP.EnablePlayerESP) ESP.PlayersList = GameObject.FindObjectsOfType<Player>();
                 if(ESP.EnableItemESP) ESP.PickupsList = GameObject.FindObjectsOfType<Pickup>();
                 if(ESP.EnableMonsterESP) ESP.BotsList = GameObject.FindObjectsOfType<Bot>();
