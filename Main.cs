@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using BepInEx;
+using ContentWarningCheat;
 using DefaultNamespace;
 using HarmonyLib;
 using Photon.Pun;
@@ -15,7 +16,7 @@ using UnityEngine;
 using Zorro.Core;
 using Zorro.UI;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     class Win32
     {
@@ -29,9 +30,11 @@ namespace TestUnityPlugin
         {
             //Bypass Plugin Check
             Traverse.Create(GameHandler.Instance).Field("m_pluginHash").SetValue(null);
+            CheckUpdate.CheckForUpdate();
         }
         void OnGUI()
         {
+            CheckUpdate.DrawHasNewUpdate();
             ESP.StartESP();
             //显示菜单
             if (!DisplayingWindow)
@@ -498,7 +501,7 @@ namespace TestUnityPlugin
             {
                 int x = 0, y = 0;
                 GUILayout.BeginArea(new Rect(x, y + (title_height + 35), windowRect.width, windowRect.height - y - (title_height + 35)));
-
+                    
                 CenterLabel("大厅");
                 GUILayout.BeginHorizontal();
                 Misc.AutoJoinRandom = GUILayout.Toggle(Misc.AutoJoinRandom, "自动快速游戏");
@@ -512,8 +515,6 @@ namespace TestUnityPlugin
                 if (GUILayout.Button("Dump Items List To Console"))
                     Items.DumpItemsToConsole();
 
-                if (GUILayout.Button("打开github项目链接"))
-                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder(@"https://github.com/xiaodo1337/Content-Warning-Cheat"), new StringBuilder(), new StringBuilder(), 0);
                 CenterLabel("严厉谴责国内某个拿github开源代码圈钱的傻狗");
                 GUILayout.EndArea();
             }

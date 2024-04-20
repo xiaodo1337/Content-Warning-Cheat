@@ -43,6 +43,9 @@
       <HintPath>..\..\SteamBase\steamapps\common\Content Warning\BepInEx\core\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PhotonRealtime">
       <HintPath>..\..\SteamBase\steamapps\common\Content Warning\Content Warning_Data\Managed\PhotonRealtime.dll</HintPath>
       <Private>False</Private>
@@ -105,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckUpdate.cs" />
     <Compile Include="ESP.cs" />
     <Compile Include="UsefulFuncs.cs" />
     <Compile Include="Items.cs" />
@@ -114,6 +118,9 @@
     <Compile Include="Main.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

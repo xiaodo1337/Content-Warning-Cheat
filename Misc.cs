@@ -11,7 +11,7 @@ using Photon.Realtime;
 using UnityEngine;
 using Zorro.Core;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     internal class Misc
     {

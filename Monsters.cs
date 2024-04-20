@@ -9,7 +9,7 @@ using Photon.Pun;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     internal class Monsters
     {

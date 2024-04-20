@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.LowLevel;
 using static UnityEngine.GraphicsBuffer;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     internal class Players
     {
@@ -26,34 +26,15 @@ namespace TestUnityPlugin
         public static float SprintMultipiler = 1f;
         public static float JumpHeightMultipiler = 1f;
         public static Dictionary<Player, bool> InGame = new Dictionary<Player, bool>();
-        public static List<Player> InRealm = new List<Player>();
+        private static bool isUpdateDone = true;
         public static void Run()
         {
+            UpdateData();
             Player player = Player.localPlayer;
             if (player == null)
             {
-                InRealm.Clear();
                 InGame.Clear();
                 return;
-            }
-
-            foreach (Player __player in GameObject.FindObjectsOfType<Player>())
-            {
-                if (__player.ai || __player.IsLocal || InGame.ContainsKey(__player))
-                    continue;
-                InGame.Add(__player, false);
-            }
-            foreach (KeyValuePair<Player, bool> keyValuePair in InGame)
-            {
-                if (keyValuePair.Key != null)
-                    continue;
-                InGame.Remove(keyValuePair.Key);
-            }
-            foreach (Player __player in InRealm)
-            {
-                if (__player != null)
-                    continue;
-                InRealm.Remove(__player);
             }
 
             if (InfinityHealth)
@@ -84,6 +65,26 @@ namespace TestUnityPlugin
             player.refs.controller.sprintMultiplier = 2.3f * SprintMultipiler;
 
             CustomPlayerFace.ChangeFace();
+        }
+        private static async void UpdateData()
+        {
+            if (!isUpdateDone) return;
+            isUpdateDone = false;
+            await Task.Delay(1000);
+            foreach (Player __player in GameObject.FindObjectsOfType<Player>())
+            {
+                if (__player.ai || __player.IsLocal || InGame.ContainsKey(__player))
+                    continue;
+                InGame.Add(__player, false);
+            }
+            foreach (KeyValuePair<Player, bool> keyValuePair in InGame)
+            {
+                if (keyValuePair.Key != null)
+                    continue;
+                InGame.Remove(keyValuePair.Key);
+            }
+            Debug.Log("Update Player List");
+            isUpdateDone = true;
         }
         public static void JoinRealm(bool local = false)
         {
@@ -295,7 +296,7 @@ namespace TestUnityPlugin
         public static void ChangeFace()
         {
             //color
-            ColorHUE = ColorHUE >= 1.0f ? 0.005f : ColorHUE + 0.005f;
+            ColorHUE = ColorHUE >= 1.0f ? 0.001f : ColorHUE + 0.001f;
             //size
             if(backScale)
             {

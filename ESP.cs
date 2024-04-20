@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zorro.Core;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     internal class ESP
     {
@@ -35,7 +35,7 @@ namespace TestUnityPlugin
         {
             if (!isUpdateDone) return;
             isUpdateDone = false;
-            await Task.Delay(1500);
+            await Task.Delay(2000);
             PlayersList = GameObject.FindObjectsOfType<Player>();
             PickupsList = GameObject.FindObjectsOfType<Pickup>();
             BotsList = GameObject.FindObjectsOfType<Bot>();

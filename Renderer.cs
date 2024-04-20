@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TestUnityPlugin
+namespace ContentWarningCheat
 {
     internal class Renderer
     {
