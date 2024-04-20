@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 using BepInEx;
 using ContentWarningCheat;
 using DefaultNamespace;
@@ -23,13 +24,15 @@ namespace ContentWarningCheat
         [DllImport("Shell32.dll")]
         public static extern int ShellExecuteA(IntPtr hwnd, StringBuilder lpszOp, StringBuilder lpszFile, StringBuilder lpszParams, StringBuilder lpszDir, int FsShowCmd);
     }
-    [BepInPlugin("xiaodo.plugin.test.HelloWorld", "Hello, World!", "1.0")]
+    [BepInPlugin("xiaodo.plugin.ContentWarningCheat", "Cheating!", CheckUpdate.Version)]
     public class HelloWorld : BaseUnityPlugin
     {
         void Start()
         {
             //Bypass Plugin Check
             Traverse.Create(GameHandler.Instance).Field("m_pluginHash").SetValue(null);
+
+            //Check Plugin Update
             CheckUpdate.CheckForUpdate();
         }
         void OnGUI()
@@ -48,6 +51,7 @@ namespace ContentWarningCheat
             if (Input.GetKeyDown(KeyCode.Insert))
                 DisplayingWindow = !DisplayingWindow;
 
+            Hack.UpdateData();
             Players.Run();
             Items.Run();
             Misc.Run();
@@ -501,7 +505,7 @@ namespace ContentWarningCheat
             {
                 int x = 0, y = 0;
                 GUILayout.BeginArea(new Rect(x, y + (title_height + 35), windowRect.width, windowRect.height - y - (title_height + 35)));
-                    
+
                 CenterLabel("大厅");
                 GUILayout.BeginHorizontal();
                 Misc.AutoJoinRandom = GUILayout.Toggle(Misc.AutoJoinRandom, "自动快速游戏");
@@ -528,8 +532,10 @@ namespace ContentWarningCheat
             GUILayout.EndHorizontal();
         }
     }
-    class Hack
+    internal class Hack
     {
+        private static float NextUpdate = 0f;
+        private static float UpdateInterval = 1.0f;
         public static Label GUILabel = Label.Misc;
         public enum Label
         {
@@ -538,6 +544,32 @@ namespace ContentWarningCheat
             ESP,
             Misc,
             Players
+        }
+        public static void UpdateData()
+        {
+            if (Time.time >= NextUpdate)
+            {
+                NextUpdate = Time.time + UpdateInterval;
+                if (Player.localPlayer == null)
+                    return;
+                if(ESP.EnablePlayerESP) ESP.PlayersList = GameObject.FindObjectsOfType<Player>();
+                if(ESP.EnableItemESP) ESP.PickupsList = GameObject.FindObjectsOfType<Pickup>();
+                if(ESP.EnableMonsterESP) ESP.BotsList = GameObject.FindObjectsOfType<Bot>();
+                if(ESP.EnableDivingBellESP) ESP.DivingBellsList = GameObject.FindObjectsOfType<UseDivingBellButton>();
+                foreach (Player __player in GameObject.FindObjectsOfType<Player>())
+                {
+                    if (__player.ai || __player.IsLocal || Players.InGame.ContainsKey(__player))
+                        continue;
+                    Players.InGame.Add(__player, false);
+                }
+                foreach (KeyValuePair<Player, bool> keyValuePair in Players.InGame)
+                {
+                    if (keyValuePair.Key != null)
+                        continue;
+                    Players.InGame.Remove(keyValuePair.Key);
+                }
+                Debug.Log("Update Lists");
+            }
         }
     }
 }

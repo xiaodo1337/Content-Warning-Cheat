@@ -90,15 +90,6 @@ namespace ContentWarningCheat
                         ItemsTypeList[ItemType.Others].Add(item.id, item.name);
                     }
                 }
-                /*
-                foreach (Item item in ItemsList)
-                {
-                    if (item.purchasable || item.name.Contains("GrabberArm") || item.name.Contains("Flashlight") || 
-                        item.name == "WalkieTalkie" || item.name == "Radio" || item.name.Contains("Emote_"))
-                        continue;
-                    ItemsTypeList[ItemType.Others].Add(item.id, item.name);
-                }
-                */
             }
             if (NoGrabberLimit) SetGrabberArmNotBreak();
             if (BlockBombSpawn) CheckIsBombSpawn();

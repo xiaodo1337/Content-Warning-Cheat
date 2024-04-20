@@ -26,10 +26,8 @@ namespace ContentWarningCheat
         public static float SprintMultipiler = 1f;
         public static float JumpHeightMultipiler = 1f;
         public static Dictionary<Player, bool> InGame = new Dictionary<Player, bool>();
-        private static bool isUpdateDone = true;
         public static void Run()
         {
-            UpdateData();
             Player player = Player.localPlayer;
             if (player == null)
             {
@@ -65,26 +63,6 @@ namespace ContentWarningCheat
             player.refs.controller.sprintMultiplier = 2.3f * SprintMultipiler;
 
             CustomPlayerFace.ChangeFace();
-        }
-        private static async void UpdateData()
-        {
-            if (!isUpdateDone) return;
-            isUpdateDone = false;
-            await Task.Delay(1000);
-            foreach (Player __player in GameObject.FindObjectsOfType<Player>())
-            {
-                if (__player.ai || __player.IsLocal || InGame.ContainsKey(__player))
-                    continue;
-                InGame.Add(__player, false);
-            }
-            foreach (KeyValuePair<Player, bool> keyValuePair in InGame)
-            {
-                if (keyValuePair.Key != null)
-                    continue;
-                InGame.Remove(keyValuePair.Key);
-            }
-            Debug.Log("Update Player List");
-            isUpdateDone = true;
         }
         public static void JoinRealm(bool local = false)
         {
@@ -286,7 +264,7 @@ namespace ContentWarningCheat
             "此作弊模组免费开源，如果你是购买获得，恭喜你被圈钱了！"
         };
         public static int CurrentNamePos = 0;
-        public static float ColorHUE = 0.005f;
+        public static float ColorHUE = 0.001f;
         public static float Rotation = 0f;
         public static bool Direction = true;
         public static float Scale = 0.03f;

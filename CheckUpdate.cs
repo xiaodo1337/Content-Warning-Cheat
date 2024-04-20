@@ -9,7 +9,7 @@ namespace ContentWarningCheat
     internal class CheckUpdate
     {
         private static bool hasNewUpdate = false;
-        private static string Version = "v1.0";
+        public const string Version = "v1.2";
 
         public static void DrawHasNewUpdate()
         {
@@ -32,7 +32,7 @@ namespace ContentWarningCheat
                     Debug.Log($"[小豆-内容警告] 从GitHub存储库获取最新版本成功.");
                     JObject json = JObject.Parse(responseBody);
                     hasNewUpdate = (json["tag_name"].ToString() != Version);
-                    Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder($@"https://github.com/xiaodo1337/Content-Warning-Cheat/releases/tag/{json["tag_name"].ToString()}"), new StringBuilder(), new StringBuilder(), 0);
+                    if(hasNewUpdate) Win32.ShellExecuteA(IntPtr.Zero, new StringBuilder("open"), new StringBuilder($@"https://github.com/xiaodo1337/Content-Warning-Cheat/releases/tag/{json["tag_name"].ToString()}"), new StringBuilder(), new StringBuilder(), 0);
                 }
                 else
                 {

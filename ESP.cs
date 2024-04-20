@@ -15,32 +15,18 @@ namespace ContentWarningCheat
         public static bool EnableItemESP { get; set; } = true;
         public static bool EnableDivingBellESP { get; set; } = true;
         public static bool EnableDistance { get; set; } = false;
-        private static Player[] PlayersList;
-        private static Pickup[] PickupsList;
-        private static Bot[] BotsList;
-        private static UseDivingBellButton[] DivingBellsList;
-        private static bool isUpdateDone = true;
+        public static Player[] PlayersList;
+        public static Pickup[] PickupsList;
+        public static Bot[] BotsList;
+        public static UseDivingBellButton[] DivingBellsList;
         public static void StartESP()
         {
-            UpdateData();
-            if(Player.localPlayer)
-            {
-                if (EnablePlayerESP) PlayerESP();
-                if (EnableMonsterESP) MonsterESP();
-                if (EnableItemESP) ItemESP();
-                if (EnableDivingBellESP) DivingBellESP();
-            }
-        }
-        private static async void UpdateData()
-        {
-            if (!isUpdateDone) return;
-            isUpdateDone = false;
-            await Task.Delay(2000);
-            PlayersList = GameObject.FindObjectsOfType<Player>();
-            PickupsList = GameObject.FindObjectsOfType<Pickup>();
-            BotsList = GameObject.FindObjectsOfType<Bot>();
-            DivingBellsList = GameObject.FindObjectsOfType<UseDivingBellButton>();
-            isUpdateDone = true;
+            if (Player.localPlayer == null)
+                return;
+            if (EnablePlayerESP) PlayerESP();
+            if (EnableMonsterESP) MonsterESP();
+            if (EnableItemESP) ItemESP();
+            if (EnableDivingBellESP) DivingBellESP();
         }
         public static void PlayerESP()
         {
