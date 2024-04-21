@@ -51,7 +51,7 @@ namespace ContentWarningCheat
             if (Input.GetKeyDown(KeyCode.Insert))
                 DisplayingWindow = !DisplayingWindow;
 
-            Hack.UpdateData();
+            Data.UpdateData();
             Players.Run();
             Items.Run();
             Misc.Run();
@@ -534,8 +534,6 @@ namespace ContentWarningCheat
     }
     internal class Hack
     {
-        private static float NextUpdate = 0f;
-        private static readonly float UpdateInterval = 1.0f;
         public static Label GUILabel = Label.Misc;
         public enum Label
         {
@@ -544,33 +542,6 @@ namespace ContentWarningCheat
             ESP,
             Misc,
             Players
-        }
-        public static void UpdateData()
-        {
-            if (Time.time >= NextUpdate)
-            {
-                NextUpdate = Time.time + UpdateInterval;
-                if (Player.localPlayer == null)
-                    return;
-
-                if(ESP.EnablePlayerESP) ESP.PlayersList = GameObject.FindObjectsOfType<Player>();
-                if(ESP.EnableItemESP) ESP.PickupsList = GameObject.FindObjectsOfType<Pickup>();
-                if(ESP.EnableMonsterESP) ESP.BotsList = GameObject.FindObjectsOfType<Bot>();
-                if(ESP.EnableDivingBellESP) ESP.DivingBellsList = GameObject.FindObjectsOfType<UseDivingBellButton>();
-                foreach (Player __player in GameObject.FindObjectsOfType<Player>())
-                {
-                    if (__player.ai || __player.IsLocal || Players.InGame.ContainsKey(__player))
-                        continue;
-                    Players.InGame.Add(__player, false);
-                }
-                foreach (KeyValuePair<Player, bool> keyValuePair in Players.InGame)
-                {
-                    if (keyValuePair.Key != null)
-                        continue;
-                    Players.InGame.Remove(keyValuePair.Key);
-                }
-                Debug.Log("Update Lists");
-            }
         }
     }
 }

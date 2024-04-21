@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckUpdate.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="ESP.cs" />
     <Compile Include="UsefulFuncs.cs" />
     <Compile Include="Items.cs" />

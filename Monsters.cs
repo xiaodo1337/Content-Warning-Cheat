@@ -62,14 +62,14 @@ namespace ContentWarningCheat
         }
         public static void ReviveAll()
         {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 monster.transform.parent.GetComponent<Player>().refs.view.RPC("RPCA_PlayerRevive", RpcTarget.All, new object[] { });
             }
         }
         public static void KillAll()
         {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 monster.transform.parent.GetComponent<Player>().refs.view.RPC("RPCA_PlayerDie", RpcTarget.All, new object[] { });
             }
@@ -87,28 +87,28 @@ namespace ContentWarningCheat
             if (bomb_id == byte.MaxValue)
                 return;
 
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 Items.SpawnItem(new byte[] { bomb_id }, monster.transform.parent.position);
             }
         }
         public static void Falldown()
         {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 monster.transform.parent.GetComponent<Player>().refs.view.RPC("RPCA_Fall", RpcTarget.All, new object[] { 5f });
             }
         }
         public static void Cum()
         {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 PhotonNetwork.Instantiate("ExplodedGoop", monster.groundTransform.position, Quaternion.identity);
             }
         }
         public static void DragToLocal()
         {
-            foreach (Bot monster in GameObject.FindObjectsOfType<Bot>())
+            foreach (Bot monster in Data.BotsList)
             {
                 Vector3 Dir = Player.localPlayer.refs.headPos.position - monster.centerTransform.position;
                 monster.transform.parent.GetComponent<Player>().refs.view.RPC("RPCA_TakeDamageAndAddForce", RpcTarget.All, new object[] { 0f, Dir.normalized * 8f, 1.5f });

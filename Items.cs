@@ -91,6 +91,7 @@ namespace ContentWarningCheat
                     }
                 }
             }
+
             if (NoGrabberLimit) SetGrabberArmNotBreak();
             if (BlockBombSpawn) CheckIsBombSpawn();
             if (InfinityPower) SetMaxBattery();
@@ -98,7 +99,7 @@ namespace ContentWarningCheat
         }
         public static void CheckIsBombSpawn()
         {
-            foreach (Pickup pickup in GameObject.FindObjectsOfType<Pickup>())
+            foreach (Pickup pickup in Data.PickupsList)
             {
                 if (pickup.itemInstance.item.name != "Bomb")
                     continue;
@@ -107,7 +108,7 @@ namespace ContentWarningCheat
         }
         public static void SetGrabberArmNotBreak()
         {
-            foreach (ItemGrabberArm grabberArm in GameObject.FindObjectsOfType<ItemGrabberArm>())
+            foreach (ItemGrabberArm grabberArm in Data.ItemGrabberArmsList)
             {
                 if (grabberArm.transform.parent.GetComponent<Player>() == Player.localPlayer)
                 {
@@ -125,7 +126,7 @@ namespace ContentWarningCheat
         }
         public static void SetMaxBattery()
         {
-            foreach(ShockStick stockStick in GameObject.FindObjectsOfType<ShockStick>())
+            foreach(ShockStick stockStick in Data.ShockSticksList)
             {
                 if(stockStick.transform.parent.GetComponent<Player>() == Player.localPlayer)
                 {
@@ -133,7 +134,7 @@ namespace ContentWarningCheat
                     batteryEntry.m_charge = batteryEntry.m_maxCharge;
                 }
             }
-            foreach (Flashlight flashlight in GameObject.FindObjectsOfType<Flashlight>())
+            foreach (Flashlight flashlight in Data.FlashlightsList)
             {
                 if (flashlight.transform.parent.GetComponent<Player>() == Player.localPlayer)
                 {
@@ -141,7 +142,7 @@ namespace ContentWarningCheat
                     batteryEntry.m_charge = batteryEntry.m_maxCharge;
                 }
             }
-            foreach (Defib defib in GameObject.FindObjectsOfType<Defib>())
+            foreach (Defib defib in Data.DefibsList)
             {
                 if (defib.transform.parent.GetComponent<Player>() == Player.localPlayer)
                 {
@@ -149,7 +150,7 @@ namespace ContentWarningCheat
                     batteryEntry.m_charge = batteryEntry.m_maxCharge;
                 }
             }
-            foreach (ArtifactRadio artifactRadio in GameObject.FindObjectsOfType<ArtifactRadio>())
+            foreach (ArtifactRadio artifactRadio in Data.ArtifactRadiosList)
             {
                 if (artifactRadio.transform.parent.GetComponent<Player>() == Player.localPlayer)
                 {
@@ -160,7 +161,7 @@ namespace ContentWarningCheat
         }
         public static void SetPartyPopperUnused()
         {
-            foreach(PartyPopper partyPopper in GameObject.FindObjectsOfType<PartyPopper>())
+            foreach(PartyPopper partyPopper in Data.PartyPoppersList)
             {
                 if(!partyPopper.transform.parent.TryGetComponent(out Player owner))
                     continue;
@@ -249,7 +250,7 @@ namespace ContentWarningCheat
         }
         public static void DestoryDropedItems()
         {
-            foreach (Pickup pickup in GameObject.FindObjectsOfType<Pickup>())
+            foreach (Pickup pickup in Data.PickupsList)
             {
                 if (pickup.itemInstance.item.name == "Camera" || pickup.itemInstance.item.name == "Old Flashlight")
                     continue;

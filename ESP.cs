@@ -15,10 +15,6 @@ namespace ContentWarningCheat
         public static bool EnableItemESP { get; set; } = true;
         public static bool EnableDivingBellESP { get; set; } = true;
         public static bool EnableDistance { get; set; } = false;
-        public static Player[] PlayersList;
-        public static Pickup[] PickupsList;
-        public static Bot[] BotsList;
-        public static UseDivingBellButton[] DivingBellsList;
         public static void StartESP()
         {
             if (Player.localPlayer == null)
@@ -30,7 +26,7 @@ namespace ContentWarningCheat
         }
         public static void PlayerESP()
         {
-            foreach(Player player in PlayersList)
+            foreach(Player player in Data.PlayersList)
             {
                 if (player == null || player.ai || player.IsLocal)
                     continue;
@@ -52,7 +48,7 @@ namespace ContentWarningCheat
         }
         public static void MonsterESP()
         {
-            foreach(Bot monster in BotsList)
+            foreach(Bot monster in Data.BotsList)
             {
                 if (monster == null)
                     continue;
@@ -74,7 +70,7 @@ namespace ContentWarningCheat
         }
         public static void ItemESP()
         {
-            foreach (Pickup pickup in PickupsList)
+            foreach (Pickup pickup in Data.PickupsList)
             {
                 if (pickup == null || pickup.name != "PickupHolder(Clone)")
                     continue;
@@ -106,7 +102,7 @@ namespace ContentWarningCheat
         }
         public static void DivingBellESP()
         {
-            foreach (UseDivingBellButton divingbellbutton in DivingBellsList)
+            foreach (UseDivingBellButton divingbellbutton in Data.DivingBellsList)
             {
                 if (divingbellbutton == null)
                     continue;

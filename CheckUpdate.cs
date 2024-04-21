@@ -9,7 +9,7 @@ namespace ContentWarningCheat
     internal class CheckUpdate
     {
         private static bool hasNewUpdate = false;
-        public const string Version = "v1.2";
+        public const string Version = "v1.3";
 
         public static void DrawHasNewUpdate()
         {
